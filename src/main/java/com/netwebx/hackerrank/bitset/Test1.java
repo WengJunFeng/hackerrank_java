@@ -54,7 +54,15 @@ public class Test1 {
                 }
             }
 
-            System.out.println(B1. + " " + convert(B2));
+            if (operation.equals("XOR")) {
+                if (a.equals(1)) {
+                    B1.xor(B2);
+                } else {
+                    B2.xor(B1);
+                }
+            }
+
+            System.out.printf("%d %d%n", howmanySet(B1), howmanySet(B2));
         }
     }
 
@@ -79,5 +87,16 @@ public class Test1 {
             count++;
         }
         return value;
+    }
+
+    private static int howmanySet(BitSet bits) {
+        int count = 0;
+        for (int i = 0; i < bits.length(); i++) {
+            if (bits.get(i)) {
+                count++;
+            }
+        }
+
+        return count;
     }
 }
