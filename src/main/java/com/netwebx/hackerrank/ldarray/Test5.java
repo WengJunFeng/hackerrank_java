@@ -55,6 +55,10 @@ public class Test5 {
                 return true;
             }
 
+            if (game[j] == 0 && (j + jumpStep) >= game.length) {
+                return true;
+            }
+
             if (game[j] == 0 && game[j + jumpStep] == 0) {
                 j += jumpStep;
                 continue;
@@ -116,7 +120,7 @@ public class Test5 {
 
         backStep = current - jumpStep;
         if (backStep < 0) {
-            for( int i = 0; i < current; i++) {
+            for ( int i = 0; i < current; i++) {
                 if (game[i] > 0) {
                     hasCode = true;
                 }
@@ -126,11 +130,23 @@ public class Test5 {
             } else {
                 return step;
             }
-        } else {
-            if (game[backStep] == 0) {
-                return step;
+        }
+
+        int count = 0;
+        while (backStep > 0) {
+            if (count >= jumpStep) {
+                return GAME_FAIL;
+            }
+            if (game[backStep] > 0 || game[current] > 0) {
+                backStep -= 1;
+                current -= 1;
+                count++;
+            }
+            if (game[backStep] == 0 && game[current] == 0) {
+                count = 0;
             }
         }
-        return step;
+
+        return GAME_FAIL;
     }
 }
